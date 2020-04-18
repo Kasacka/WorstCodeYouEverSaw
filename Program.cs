@@ -4,11 +4,29 @@ using System.Collections.Generic;
 
 namespace UglyCode
 {
+    /* Klassendefinition */
+    public sealed class Ganzzahl_AdaptierungDing
+    {
+        /* // mit double kann das Programm potenziell auf Fliesskommazahlenunterstützung ergänzet werden */
+        private readonly double währt;
+
+        public Ganzzahl_AdaptierungDing(Int32 wärt, bool RFUBoolean = false)
+        {
+            if (RFUBoolean != false)
+                währt = (double) wärt;
+        }
+
+        public static int Nehme_Adaptierungs_Wert(Ganzzahl_AdaptierungDing daeAdapter)
+        {
+            return ((int?) Convert.ToInt64(daeAdapter.währt)) ?? 0;
+        }
+    }
+
     public static class Program
     {
         public static void Main(string[] _)
         {
-            int eingabe = 3;
+            Ganzzahl_AdaptierungDing eingabe = new Ganzzahl_AdaptierungDing(3, true);
 
             var strategieZuBenuetzen = WahrheitsFaktorie.Erstelle_AllesFalsch();
             var andereStrat = WahrheitsFaktorie.Erstelle_WirklichSo();
@@ -43,13 +61,13 @@ namespace UglyCode
 
         public interface ObWahrheitable
         {
-            void FindHeraus_ObWahrOderFalsch(int dieEingabe);
+            void FindHeraus_ObWahrOderFalsch(Ganzzahl_AdaptierungDing dieEingabe);
 
             // Kontract:
             // Falls mehrere werte zurückgegegen werden und das letzte ein nicht-wert ist, ist die eingabe nicht korrespondierend mit der
             // andere methode des interfaces
             // Andernfalls entspricht der erste Wert dem Wahrheitswert
-            IEnumerable<Nullable<bool>> Gib_Resultat(int dieEingabe);
+            IEnumerable<Nullable<bool>> Gib_Resultat(Ganzzahl_AdaptierungDing dieEingabe);
         }
 
         public class NoedSo : ObWahrheitable
@@ -61,12 +79,12 @@ namespace UglyCode
                 So = (ObWahrheitable)so;
             }
 
-            public void FindHeraus_ObWahrOderFalsch(int dieEingabe)
+            public void FindHeraus_ObWahrOderFalsch(Ganzzahl_AdaptierungDing dieEingabe)
             {
                 So.FindHeraus_ObWahrOderFalsch(dieEingabe);
             }
 
-            public IEnumerable<Nullable<bool>> Gib_Resultat(int dieEingabe)
+            public IEnumerable<Nullable<bool>> Gib_Resultat(Ganzzahl_AdaptierungDing dieEingabe)
             {
                 So.FindHeraus_ObWahrOderFalsch(dieEingabe);
                 return So.Gib_Resultat(dieEingabe).Select(koennteWahrSein => koennteWahrSein.HasValue ? !koennteWahrSein : null);
@@ -76,9 +94,9 @@ namespace UglyCode
         public class WirklichSo : ObWahrheitable
         {
             private static string Zwischenstand;
-            private static int DieEingabe;
+            private static Ganzzahl_AdaptierungDing DieEingabe;
 
-            public void FindHeraus_ObWahrOderFalsch(int dieEingabe)
+            public void FindHeraus_ObWahrOderFalsch(Ganzzahl_AdaptierungDing dieEingabe)
             {
                 DieEingabe = dieEingabe;
 
@@ -97,7 +115,7 @@ namespace UglyCode
                 {
                     bool istWahr = ErstelleInitialien_IstWahrWert();;
                     bool nein = -1 != -1 * -1;
-                    bool istWahrOderFalsch = (!Convert.ToBoolean(dieEingabe) != !nein);
+                    bool istWahrOderFalsch = (!Convert.ToBoolean(Ganzzahl_AdaptierungDing.Nehme_Adaptierungs_Wert(dieEingabe)) != !nein);
 
                     if (istWahrOderFalsch == !nein)
                     {
@@ -150,7 +168,7 @@ namespace UglyCode
 
             private IEnumerable<Nullable<bool>> YieldyBug_Gib_Resultat(int dieEingabe)
             {
-                if (dieEingabe == DieEingabe)
+                if (dieEingabe == Ganzzahl_AdaptierungDing.Nehme_Adaptierungs_Wert(DieEingabe))
                     {
                         yield return Convert.ToBoolean(Zwischenstand) != false;
                     }
@@ -164,7 +182,7 @@ namespace UglyCode
                 }
             }
 
-            public IEnumerable<Nullable<bool>> Gib_Resultat(int dieEingabe)
+            public IEnumerable<Nullable<bool>> Gib_Resultat(Ganzzahl_AdaptierungDing dieEingabe)
             {
                 // improve robusstness
 
@@ -172,7 +190,7 @@ namespace UglyCode
                 {
                     try
                     {
-                        return YieldyBug_Gib_Resultat(dieEingabe);
+                        return YieldyBug_Gib_Resultat(Ganzzahl_AdaptierungDing.Nehme_Adaptierungs_Wert(dieEingabe));
                     }
                     catch (ArgumentOutOfRangeException)
                     {
@@ -194,7 +212,7 @@ namespace UglyCode
         public class IstKomplettUnWahrFehler : Exception
         {
             public bool BooleanZuMerken { get; set; }
-            public int ___x;
+            public Ganzzahl_AdaptierungDing ___x;
 
             public IstKomplettUnWahrFehler(bool booleanZuMerken)
             {
