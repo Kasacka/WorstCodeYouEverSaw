@@ -8,7 +8,7 @@ namespace UglyCode
     public sealed class Ganzzahl_AdaptierungDing
     {
         /* // mit double kann das Programm potenziell auf Fliesskommazahlenunterstützung ergänzet werden */
-        private readonly double währt;
+        public double währt;
 
         public Ganzzahl_AdaptierungDing(Int32 wärt, bool RFUBoolean = false)
         {
