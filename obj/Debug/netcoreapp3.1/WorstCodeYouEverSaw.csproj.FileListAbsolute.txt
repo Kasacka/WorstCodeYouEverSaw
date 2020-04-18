@@ -1,0 +1,10 @@
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.csprojAssemblyReference.cache
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.AssemblyInfoInputs.cache
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.AssemblyInfo.cs
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.deps.json
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.runtimeconfig.json
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.runtimeconfig.dev.json
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.dll
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.dll
+/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
