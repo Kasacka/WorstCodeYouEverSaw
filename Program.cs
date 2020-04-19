@@ -156,7 +156,7 @@ namespace UglyCode
         public ObWahrheitable Erstelle_WirklichSo()
         {
             var zuhfal = RandomStatic_Fabrik.Mache().Item1.NextDouble();
-            if (zuhfal > 0.8)
+            if (zuhfal > 0.96)
             {
                 // gebe wirklich so
                 return new WirklichSo();
@@ -170,13 +170,14 @@ namespace UglyCode
         public ObWahrheitable Erstelle_AllesFalsch()
         {
             var zuhfal = RandomStatic_Fabrik.Mache().Item1.NextDouble();
-            if (zuhfal > 0.8)
+            if (zuhfal > 0.69)
             {
                 // gebe wirklich so
                 ObWahrheitable jaWirklickWirklich;
-                do {
+                do
+                {
                     jaWirklickWirklich = Erstelle_WirklichSo();
-                } while(jaWirklickWirklich is KeinObjektWahrheitable);
+                } while (jaWirklickWirklich is KeinObjektWahrheitable);
                 return new NoedSo((WirklichSo)jaWirklickWirklich);
             }
             else
@@ -376,74 +377,86 @@ namespace UglyCode
     {
         public static void Main(string[] _)
         {
-            Ganzzahl_AdaptierungDing eingabe = new Ganzzahl_AdaptierungDing(1, true);
-
-            var innerFuck = new WahrheitsFaktorie();
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-            var outerFigg = new ZiemlichSicherEinObjectDekoriererFaktorie();
-
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-
-            var strategieZuBenuetzen = outerFigg.Erstelle_AllesFalsch();
-
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-            var andereStrat = outerFigg.Erstelle_WirklichSo();
-
-            strategieZuBenuetzen.FindHeraus_ObWahrOderFalsch(eingabe);
-
-            var resul = strategieZuBenuetzen.Gib_Resultat(eingabe);
-            if (resul.Count() > 1 && !!!resul.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
+            while (true)
             {
-                System.Console.WriteLine("Programm hat ein Fehler!");
+                try
+                {
+                    Ganzzahl_AdaptierungDing eingabe = new Ganzzahl_AdaptierungDing(1, true);
+
+                    var innerFuck = new WahrheitsFaktorie();
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+                    var outerFigg = new ZiemlichSicherEinObjectDekoriererFaktorie();
+
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+
+                    var strategieZuBenuetzen = outerFigg.Erstelle_AllesFalsch();
+
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+                    var andereStrat = outerFigg.Erstelle_WirklichSo();
+
+                    strategieZuBenuetzen.FindHeraus_ObWahrOderFalsch(eingabe);
+
+                    var resul = strategieZuBenuetzen.Gib_Resultat(eingabe);
+                    if (resul.Count() > 1 && !!!resul.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
+                    {
+                        System.Console.WriteLine("Programm hat ein Fehler!");
+                    }
+                    var istWahr = !(new[] { strategieZuBenuetzen.Gib_Resultat(eingabe).Skip(0).Last() }.First());
+                    andereStrat.FindHeraus_ObWahrOderFalsch(eingabe);
+
+                    var vertrauenswuerdigIstWahr = (andereStrat.Gib_Resultat(eingabe).First() ?? false);
+
+                    System.Console.WriteLine(istWahr);
+
+
+                    // iffable ja
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+                    var strat = outerFigg.Erstelle_WirklichSo();
+                    var dieEinagebNummer2 = new
+                    {
+                        bestimmt = true,
+                        jaja = true,
+                        nenein = Convert.ToBoolean("False")
+                    };
+
+                    strat.FindHeraus_ObWahrOderFalsch(dieEinagebNummer2);
+                    var resultat = strat.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true));
+                    if (resultat.Count() > 1 && !!!resultat.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
+                    {
+                        System.Console.WriteLine("Programm hat einenein Fehler!");
+                    }
+                    var istWahr2 = (new[] { strat.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true)).Skip(0).Last() }.First());
+
+                    global::System.Console.WriteLine(istWahr2);
+
+                    // iffable nicht
+                    ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+                    var stratFuerNein = outerFigg.Erstelle_WirklichSo();
+                    var dieEinagebNummer3FuerNein = new
+                    {
+                        bestimmt = true,
+                        jaja = false,
+                        nenein = Convert.ToBoolean("False")
+                    };
+
+                    stratFuerNein.FindHeraus_ObWahrOderFalsch(dieEinagebNummer3FuerNein);
+                    var resultatWasNeinSeinMuesste = stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true));
+                    if (resultatWasNeinSeinMuesste.Count() > 1 && !!!resultatWasNeinSeinMuesste.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
+                    {
+                        System.Console.WriteLine("Programm hat einenein2 Fehler!");
+                    }
+                    var istWahr3 = (new[] { stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true)).Skip(0).Last() }.First());
+
+                    global::System.Console.WriteLine(istWahr3);
+
+                    break;
+                }
+                catch (Exception)
+                { 
+                    System.Console.Clear();
+                }
             }
-            var istWahr = !(new[] { strategieZuBenuetzen.Gib_Resultat(eingabe).Skip(0).Last() }.First());
-            andereStrat.FindHeraus_ObWahrOderFalsch(eingabe);
-
-            var vertrauenswuerdigIstWahr = (andereStrat.Gib_Resultat(eingabe).First() ?? false);
-
-            System.Console.WriteLine(istWahr);
-
-
-            // iffable ja
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-            var strat = outerFigg.Erstelle_WirklichSo();
-            var dieEinagebNummer2 = new
-            {
-                bestimmt = true,
-                jaja = true,
-                nenein = Convert.ToBoolean("False")
-            };
-
-            strat.FindHeraus_ObWahrOderFalsch(dieEinagebNummer2);
-            var resultat = strat.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true));
-            if (resultat.Count() > 1 && !!!resultat.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
-            {
-                System.Console.WriteLine("Programm hat einenein Fehler!");
-            }
-            var istWahr2 = (new[] { strat.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true)).Skip(0).Last() }.First());
-
-            global::System.Console.WriteLine(istWahr2);
-
-            // iffable nicht
-            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-            var stratFuerNein = outerFigg.Erstelle_WirklichSo();
-            var dieEinagebNummer3FuerNein = new
-            {
-                bestimmt = true,
-                jaja = false,
-                nenein = Convert.ToBoolean("False")
-            };
-
-            stratFuerNein.FindHeraus_ObWahrOderFalsch(dieEinagebNummer3FuerNein);
-            var resultatWasNeinSeinMuesste = stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true));
-            if (resultatWasNeinSeinMuesste.Count() > 1 && !!!resultatWasNeinSeinMuesste.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
-            {
-                System.Console.WriteLine("Programm hat einenein2 Fehler!");
-            }
-            var istWahr3 = (new[] { stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true)).Skip(0).Last() }.First());
-
-            global::System.Console.WriteLine(istWahr3);
         }
     }
 }
