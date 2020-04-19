@@ -8,3 +8,15 @@
 /Users/joelegger/Desktop/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
 /Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.dll
 /Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.deps.json
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.runtimeconfig.json
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.runtimeconfig.dev.json
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.dll
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/bin/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.csprojAssemblyReference.cache
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.csproj.CoreCompileInputs.cache
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.AssemblyInfoInputs.cache
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.AssemblyInfo.cs
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.dll
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.pdb
+/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/Debug/netcoreapp3.1/WorstCodeYouEverSaw.genruntimeconfig.cache

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/Users/joelegger/Desktop/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj": {}
+    "/Users/lucamahler/Downloads/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj": {}
   },
   "projects": {
-    "/Users/joelegger/Desktop/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj": {
+    "/Users/lucamahler/Downloads/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/joelegger/Desktop/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj",
+        "projectUniqueName": "/Users/lucamahler/Downloads/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj",
         "projectName": "WorstCodeYouEverSaw",
-        "projectPath": "/Users/joelegger/Desktop/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj",
-        "packagesPath": "/Users/joelegger/.nuget/packages/",
-        "outputPath": "/Users/joelegger/Desktop/WorstCodeYouEverSaw/obj/",
+        "projectPath": "/Users/lucamahler/Downloads/WorstCodeYouEverSaw/WorstCodeYouEverSaw.csproj",
+        "packagesPath": "/Users/lucamahler/.nuget/packages/",
+        "outputPath": "/Users/lucamahler/Downloads/WorstCodeYouEverSaw/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/joelegger/.nuget/NuGet/NuGet.Config"
+          "/Users/lucamahler/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -50,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }
