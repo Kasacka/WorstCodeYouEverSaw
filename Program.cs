@@ -48,7 +48,7 @@ namespace UglyCode
 
             foreach (var eigenschaft in eigenschaften)
             {
-                            // System.Console.WriteLine("abc" + eigenschaft.GetValue(iffable));
+                // System.Console.WriteLine("abc" + eigenschaft.GetValue(iffable));
 
                 if (eigenschaft.GetValue(iffable) is bool && (bool)eigenschaft.GetValue(iffable) == true)
                 {
@@ -88,27 +88,97 @@ namespace UglyCode
         }
     }
 
-    public class Ganzzahl_oder_Iffable_Adapt : Ganzzahl_AdaptierungDing
+    public interface AIWahrheitsFak
     {
-        public object _Wärt { get; }
+        ObWahrheitable Erstelle_WirklichSo(); ObWahrheitable Erstelle_AllesFalsch();
+    }
 
-        public Ganzzahl_oder_Iffable_Adapt(object wärt) : base(1, true)
+    public class ZiemlichSicherEinObjectDekoriererFaktorie : AIWahrheitsFak
+    {
+        public static AIWahrheitsFak mapped;
+
+        public ObWahrheitable Erstelle_AllesFalsch()
         {
-            _Wärt = wärt;
+            ObWahrheitable jetzt = mapped.Erstelle_AllesFalsch();
+            for (int _ = 0; _ < 15; _ = 1 + _)
+            {
+                if (jetzt is KeinObjektWahrheitable)
+                {
+
+                }
+                else
+                {
+                    var temp = mapped.Erstelle_AllesFalsch();
+                    jetzt = temp;
+                    if (!(jetzt is KeinObjektWahrheitable))
+                        break;
+                    else
+                        continue;
+                }
+            }
+            mapped = null;
+            return jetzt;
+        }
+
+        public ObWahrheitable Erstelle_WirklichSo()
+        {
+            ObWahrheitable jetzt = mapped.Erstelle_WirklichSo();
+            for (int _ = 0; _ < 15; _ = 1 + _)
+            {
+                if (jetzt is KeinObjektWahrheitable)
+                {
+
+                }
+                else
+                {
+                    var temp = mapped.Erstelle_WirklichSo();
+                    jetzt = temp;
+                    if (!(jetzt is WirklichSo))
+                        continue;
+                    else
+                        break;
+                }
+            }
+            mapped = mapped;
+            return jetzt;
         }
     }
 
-    public static class WahrheitsFaktorie
+    public class WahrheitsFaktorie : AIWahrheitsFak
     {
-        public static ObWahrheitable Erstelle_WirklichSo()
+        public static class RandomStatic_Fabrik
         {
-            // gebe wirklich so
-            return new WirklichSo();
+            public static (Random, Random) Mache()
+            {
+                return (new Random(), null);
+            }
+        }
+        public ObWahrheitable Erstelle_WirklichSo()
+        {
+            var zuhfal = RandomStatic_Fabrik.Mache().Item1.Next();
+            if (zuhfal > 0.8)
+            {
+                // gebe wirklich so
+                return new WirklichSo();
+            }
+            else
+            {
+                return new KeinObjektWahrheitable();
+            }
         }
 
-        public static ObWahrheitable Erstelle_AllesFalsch()
+        public ObWahrheitable Erstelle_AllesFalsch()
         {
-            return new NoedSo((WirklichSo)Erstelle_WirklichSo());
+            var zuhfal = RandomStatic_Fabrik.Mache().Item1.Next();
+            if (zuhfal > 0.6)
+            {
+                // gebe wirklich so
+                return new NoedSo((WirklichSo)Erstelle_WirklichSo());
+            }
+            else
+            {
+                return new KeinObjektWahrheitable();
+            }
         }
     }
 
@@ -121,6 +191,21 @@ namespace UglyCode
         // andere methode des interfaces
         // Andernfalls entspricht der erste Wert dem Wahrheitswert
         IEnumerable<Nullable<bool>> Gib_Resultat(Ganzzahl_AdaptierungDing dieEingabe);
+        bool IstNullObjekt();
+    }
+
+    internal class KeinObjektWahrheitable : ObWahrheitable
+    {
+        public void FindHeraus_ObWahrOderFalsch(Ganzzahl_AdaptierungDing dieEingabe)
+        {
+        }
+
+        public IEnumerable<bool?> Gib_Resultat(Ganzzahl_AdaptierungDing dieEingabe)
+        {
+            return null;
+        }
+
+        public bool IstNullObjekt() => true;
     }
 
     public class NoedSo : ObWahrheitable
@@ -142,12 +227,19 @@ namespace UglyCode
             So.FindHeraus_ObWahrOderFalsch(dieEingabe);
             return So.Gib_Resultat(dieEingabe).Select(koennteWahrSein => koennteWahrSein.HasValue ? !koennteWahrSein : null);
         }
+
+        public bool IstNullObjekt()
+        {
+            return Convert.ToBoolean("falsch".Replace("ch", "e").Replace("f", "F"));
+        }
     }
 
     public class WirklichSo : ObWahrheitable
     {
         public static string Zwischenstand;
         public static Ganzzahl_AdaptierungDing DieEingabe;
+
+        public bool IstNullObjekt() => !"nein".Equals("nein");
 
         public void FindHeraus_ObWahrOderFalsch(Ganzzahl_AdaptierungDing dieEingabe)
         {
@@ -222,7 +314,7 @@ namespace UglyCode
         private IEnumerable<Nullable<bool>> YieldyBug_Gib_Resultat(int dieEingabe)
         {
             // System.Console.WriteLine(dieEingabe);
-               //         System.Console.WriteLine(Zwischenstand);
+            //         System.Console.WriteLine(Zwischenstand);
 
             if (dieEingabe == Ganzzahl_AdaptierungDing.Nehme_Adaptierungs_Wert(DieEingabe))
             {
@@ -282,8 +374,17 @@ namespace UglyCode
         {
             Ganzzahl_AdaptierungDing eingabe = new Ganzzahl_AdaptierungDing(1, true);
 
-            var strategieZuBenuetzen = WahrheitsFaktorie.Erstelle_AllesFalsch();
-            var andereStrat = WahrheitsFaktorie.Erstelle_WirklichSo();
+            var innerFuck = new WahrheitsFaktorie();
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+            var outerFigg = new ZiemlichSicherEinObjectDekoriererFaktorie();
+
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+
+            var strategieZuBenuetzen = outerFigg.Erstelle_AllesFalsch();
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+
+            var andereStrat = outerFigg.Erstelle_WirklichSo();
+
             strategieZuBenuetzen.FindHeraus_ObWahrOderFalsch(eingabe);
 
             var resul = strategieZuBenuetzen.Gib_Resultat(eingabe);
@@ -300,7 +401,9 @@ namespace UglyCode
 
 
             // iffable ja
-            var strat = WahrheitsFaktorie.Erstelle_WirklichSo();
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+
+            var strat = outerFigg.Erstelle_WirklichSo();
             var dieEinagebNummer2 = new
             {
                 bestimmt = true,
@@ -319,7 +422,8 @@ namespace UglyCode
             global::System.Console.WriteLine(istWahr2);
 
             // iffable nicht
-            var stratFuerNein = WahrheitsFaktorie.Erstelle_WirklichSo();
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
+            var stratFuerNein = outerFigg.Erstelle_WirklichSo();
             var dieEinagebNummer3FuerNein = new
             {
                 bestimmt = true,
@@ -329,12 +433,12 @@ namespace UglyCode
 
             stratFuerNein.FindHeraus_ObWahrOderFalsch(dieEinagebNummer3FuerNein);
             var resultatWasNeinSeinMuesste = stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true));
-             if (resultatWasNeinSeinMuesste.Count() > 1 && !!!resultatWasNeinSeinMuesste.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
+            if (resultatWasNeinSeinMuesste.Count() > 1 && !!!resultatWasNeinSeinMuesste.ToArray()[resul.ToArray().Length - (1 + 2) / 2].HasValue)
             {
                 System.Console.WriteLine("Programm hat einenein2 Fehler!");
             }
             var istWahr3 = (new[] { stratFuerNein.Gib_Resultat(new Ganzzahl_AdaptierungDing(ObWahrheitableErwieterig.FixWert_Fuer_Adaptierung, true)).Skip(0).Last() }.First());
-            
+
             global::System.Console.WriteLine(istWahr3);
         }
     }
