@@ -102,7 +102,7 @@ namespace UglyCode
             ObWahrheitable jetzt = mapped.Erstelle_AllesFalsch();
             for (int _ = 0; _ < 15; _ = 1 + _)
             {
-                if (jetzt is KeinObjektWahrheitable)
+                if (jetzt is NoedSo)
                 {
 
                 }
@@ -125,7 +125,7 @@ namespace UglyCode
             ObWahrheitable jetzt = mapped.Erstelle_WirklichSo();
             for (int _ = 0; _ < 15; _ = 1 + _)
             {
-                if (jetzt is KeinObjektWahrheitable)
+                if (jetzt is WirklichSo)
                 {
 
                 }
@@ -155,7 +155,7 @@ namespace UglyCode
         }
         public ObWahrheitable Erstelle_WirklichSo()
         {
-            var zuhfal = RandomStatic_Fabrik.Mache().Item1.Next();
+            var zuhfal = RandomStatic_Fabrik.Mache().Item1.NextDouble();
             if (zuhfal > 0.8)
             {
                 // gebe wirklich so
@@ -169,11 +169,15 @@ namespace UglyCode
 
         public ObWahrheitable Erstelle_AllesFalsch()
         {
-            var zuhfal = RandomStatic_Fabrik.Mache().Item1.Next();
-            if (zuhfal > 0.6)
+            var zuhfal = RandomStatic_Fabrik.Mache().Item1.NextDouble();
+            if (zuhfal > 0.8)
             {
                 // gebe wirklich so
-                return new NoedSo((WirklichSo)Erstelle_WirklichSo());
+                ObWahrheitable jaWirklickWirklich;
+                do {
+                    jaWirklickWirklich = Erstelle_WirklichSo();
+                } while(jaWirklickWirklich is KeinObjektWahrheitable);
+                return new NoedSo((WirklichSo)jaWirklickWirklich);
             }
             else
             {
@@ -379,10 +383,11 @@ namespace UglyCode
             var outerFigg = new ZiemlichSicherEinObjectDekoriererFaktorie();
 
             ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-
-            var strategieZuBenuetzen = outerFigg.Erstelle_AllesFalsch();
             ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
 
+            var strategieZuBenuetzen = outerFigg.Erstelle_AllesFalsch();
+
+            ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
             var andereStrat = outerFigg.Erstelle_WirklichSo();
 
             strategieZuBenuetzen.FindHeraus_ObWahrOderFalsch(eingabe);
@@ -402,7 +407,6 @@ namespace UglyCode
 
             // iffable ja
             ZiemlichSicherEinObjectDekoriererFaktorie.mapped = innerFuck;
-
             var strat = outerFigg.Erstelle_WirklichSo();
             var dieEinagebNummer2 = new
             {
